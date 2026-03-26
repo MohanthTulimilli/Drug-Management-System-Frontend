@@ -95,6 +95,8 @@ export default function BulkUploadPage() {
   const stage1Ok = validation?.stage1FileTypeOk ?? false;
   const stage2Ok = validation?.stage2ColumnsOk ?? false;
   const readyToUpload = stage1Ok && stage2Ok && file;
+  const previewRows = validation?.previewRows;
+  const hasPreviewRows = (previewRows?.length ?? 0) > 0;
 
   return (
     <div className="page active">
@@ -163,14 +165,14 @@ export default function BulkUploadPage() {
             </>
           )}
 
-          {validation?.previewRows?.length > 0 && (
+          {hasPreviewRows && previewRows && (
             <div className="table-card mt14">
               <div className="tbar"><span className="panel-title">Preview (first rows)</span></div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs">
                   <thead><tr>{REQUIRED_COLS.split(', ').map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
                   <tbody>
-                    {validation.previewRows.map((row, idx) => (
+                    {previewRows.map((row, idx) => (
                       <tr key={idx}>{row.map((cell, i) => <td key={i} className="primary">{cell}</td>)}</tr>
                     ))}
                   </tbody>

@@ -54,7 +54,7 @@ export default function CheckoutPage() {
       localStorage.removeItem(CART_KEY);
       setCart([]);
       setShowSuccess(true);
-      setReceiptOrder(order);
+      setReceiptOrder(order.data);
       setTimeout(() => {
         setShowSuccess(false);
       }, 1800);
